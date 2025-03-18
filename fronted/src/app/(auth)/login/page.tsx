@@ -13,39 +13,46 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Required'),
 });
 
-export const Login = () => {
-  const router = useRouter()
-  const [loading, setLoading] = useState(false);
-  const handleLogin = async (values) => {
+interface LoginValues {
+  email: string;
+  password: string;
+}
+
+export const Login: React.FC = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleLogin = async (values: LoginValues): Promise<void> => {
     try {
       setLoading(true);
-      const { data } = await axios.post(`http://localhost:7000/login`, values);
+      const { data } = await axios.post<{ msg: string }>('http://localhost:7000/login', values);
       setLoading(false);
 
       if (data && data.msg) {
-        toast.success(data.msg); // Use toast.success for success messages
+        toast.success(data.msg);
       } else {
-        toast.success(res.data.msg); // Fallback message
-        
+        toast.success("Login successful!");
       }  
+
       setTimeout(() => {
         router.push('/home');
-      }, 10); // 100ms delay     
+      }, 100); // 100ms delay     
 
-    } catch (err) {
+    } catch (err: unknown) {
       setLoading(false);
-      if (err.response && err.response.data && err.response.data.msg) {
-        toast.error(err.response.data.msg); // Display server-side error message
+      if (axios.isAxiosError(err) && err.response?.data?.msg) {
+        toast.error(err.response.data.msg);
       } else {
-        toast.error(err.message || "An error occurred during registration."); // Display general error message
+        toast.error((err as Error).message || "An error occurred during login.");
       }
     }
   };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100">
       <div className="max-w-md w-full p-8 bg-white shadow-2xl rounded-lg space-y-6">
         <div className="flex justify-center">
-          <Image src="/logo.png" alt="Logo" width={100} height={100} className='mr-80  '/>
+          <Image src="/logo.png" alt="Logo" width={100} height={100} className='mr-80' />
         </div>
         <h1 className="text-3xl font-bold text-center text-gray-800">Login</h1>
         <Formik
@@ -54,7 +61,7 @@ export const Login = () => {
             password: '',
           }}
           validationSchema={LoginSchema}
-          onSubmit={(values) => handleLogin(values)}
+          onSubmit={(values: LoginValues) => handleLogin(values)}
         >
           {({ errors, touched }) => (
             <Form className="space-y-4">
@@ -81,22 +88,23 @@ export const Login = () => {
                 <ErrorMessage name="password" component="div" className="text-red-500 text-xs mt-1" />
               </div>
               <button
-                  type="submit"
-                  className={`w-full py-3 rounded-md text-white font-semibold flex items-center justify-center ${
-                     loading
-                     ? 'bg-orange-300 cursor-not-allowed'
-                     : 'bg-orange-500 hover:bg-orange-600 transition-colors cursor-pointer'
-                  }`}
-                  disabled={loading} >
-                  {loading ? (
-                        <div className="flex items-center">
-                          <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2"></div>
-                            <span>Logging in...</span>
-                        </div> ) 
-                            :(
-                    <span>Login</span>
-                  )}
-                </button>
+                type="submit"
+                className={`w-full py-3 rounded-md text-white font-semibold flex items-center justify-center ${
+                  loading
+                    ? 'bg-orange-300 cursor-not-allowed'
+                    : 'bg-orange-500 hover:bg-orange-600 transition-colors cursor-pointer'
+                }`}
+                disabled={loading}
+              >
+                {loading ? (
+                  <div className="flex items-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2"></div>
+                    <span>Logging in...</span>
+                  </div>
+                ) : (
+                  <span>Login</span>
+                )}
+              </button>
             </Form>
           )}
         </Formik>
