@@ -1,6 +1,7 @@
+
 //connect mongo db
 const mongoose = require('mongoose');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv')  // use .env file to link
 
 
 const dbConnect = async ()=>{
