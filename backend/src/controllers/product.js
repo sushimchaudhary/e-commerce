@@ -6,17 +6,17 @@ const getProduct = async(req, res) => {
   }
 
 
-  //   // control registration form
-  // const createNewProduct = async (req, res) => {
+    // control registration form
+  const createNewProduct = async (req, res) => {
     
-  // }
-  // //control login form
-  // const updateproduct = async(req, res)=>{
+  }
+  //control login form
+  const updateproduct = async(req, res)=>{
    
-  // }
-  // const deleteProduct = async(req, res)=>{
+  }
+  const deleteProduct = async(req, res)=>{
    
-  // }
+  }
 
   
   module.exports = {getProduct, createNewProduct, updateproduct, deleteProduct}
