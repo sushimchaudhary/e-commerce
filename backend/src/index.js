@@ -14,7 +14,7 @@ dbConnect();
 app.use(UserRoute);
 app.use(ProductRoute)
 
-const port = process.env.PORT || 5000; // Define port properly
+const port = process.env.PORT || 8080; // Define port properly
 
 app.listen(port, () => {  // Fix incorrect arrow function
   console.log(`Server is running on port ${port}`);
