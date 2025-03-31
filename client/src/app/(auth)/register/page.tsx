@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { Button } from '@/components/ui/button';
 
 // Define TypeScript interface for form values
 interface RegisterValues {
@@ -53,7 +54,7 @@ export const Register: React.FC = () => {
   const handleRegister = async (values: RegisterValues): Promise<void> => {
     try {
       setLoading(true);
-      const { data } = await axios.post<{ msg: string }>('http://localhost:7000/register', values);
+      const { data } = await axios.post<{ msg: string }>('http://localhost:7001/register', values);
       setLoading(false);
 
       if (data?.msg) {
@@ -146,7 +147,9 @@ export const Register: React.FC = () => {
                 <ErrorMessage name="role" component="div" className="text-red-500 text-xs mt-1" />
               </div>
 
-              <button
+              <Button
+
+
                 type="submit"
                 className={`w-full py-3 rounded-md text-white font-semibold flex items-center justify-center ${
                   loading
@@ -163,7 +166,7 @@ export const Register: React.FC = () => {
                 ) : (
                   <span>Register</span>
                 )}
-              </button>
+              </Button>
             </Form>
           )}
         </Formik>

@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { addUserDetails } from '../../../lib/redux/features/user/userSlice';
+import { Button } from '@/components/ui/button';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -28,7 +29,7 @@ export const Login: React.FC = () => {
   const handleLogin = async (values: LoginValues): Promise<void> => {
     try {
       setLoading(true);
-      const { data } = await axios.post<{ msg: string }>('http://localhost:7000/login', values);
+      const { data } = await axios.post<{ msg: string }>('http://localhost:7001/login', values);
       setLoading(false);
 
       if (data && data.msg) {
@@ -91,7 +92,7 @@ export const Login: React.FC = () => {
                 />
                 <ErrorMessage name="password" component="div" className="text-red-500 text-xs mt-1" />
               </div>
-              <button
+              <Button
                 type="submit"
                 className={`w-full py-3 rounded-md text-white font-semibold flex items-center justify-center ${
                   loading
@@ -108,7 +109,7 @@ export const Login: React.FC = () => {
                 ) : (
                   <span>Login</span>
                 )}
-              </button>
+              </Button>
             </Form>
           )}
         </Formik>

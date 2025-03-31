@@ -1,10 +1,11 @@
-'use client';
+'use client'
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
+import { Button } from '@/components/ui/button';
 
 const HomePage: React.FC = () => {
   
@@ -105,14 +106,14 @@ const HomePage: React.FC = () => {
             {/* Sign Up / Sign In Buttons */}
             <div className="flex space-x-4">
             <Link href="/register">
-              <button className="px-4 py-2 bg-orange-400 text-white rounded-md hover:bg-orange-600 transition cursor-pointer">
+              <Button className="px-4 py-2 bg-orange-400 text-white rounded-md hover:bg-orange-600 transition cursor-pointer">
                 Sign Up
-              </button>
+              </Button>
             </Link>
             <Link href="/login">
-              <button className="px-4 py-2 bg-blue-400 text-white rounded-md hover:bg-blue-600 transition cursor-pointer">
+              <Button className="px-4 py-2 bg-blue-400 text-white rounded-md hover:bg-blue-600 transition cursor-pointer">
                 Sign In
-              </button>
+              </Button>
             </Link>
           </div>
         </div>
