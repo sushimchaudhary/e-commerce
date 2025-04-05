@@ -1,7 +1,7 @@
 const express = require('express');
 const dbConnect = require('./db/connection');
 const UserRoute = require("./routes/user");
-const ProductRoute = require("./routes/product")
+const ProductsRoute = require("./routes/products")
 require('dotenv').config();
 
 const app = express();
@@ -12,9 +12,9 @@ app.use(express.json());
 
 dbConnect();
 app.use(UserRoute);
-app.use(ProductRoute)
+app.use(ProductsRoute)
 
-const port = process.env.PORT || 5000; // Define port properly
+const port = process.env.PORT  // Define port properly
 
 app.listen(port, () => {  // Fix incorrect arrow function
   console.log(`Server is running on port ${port}`);
