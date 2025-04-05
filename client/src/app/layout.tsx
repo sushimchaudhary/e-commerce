@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "../lib/redux/store";
+import Header from "./(user)/header/page";
+import Footer from "./(user)/footer/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-    
+       <Header/>
         <Provider store={store}>
          <PersistGate loading={null} persistor={persistor}>
            {children}
@@ -34,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Provider>      
         
         <Toaster/>
+        <Footer/>
       </body>
     </html>
   );

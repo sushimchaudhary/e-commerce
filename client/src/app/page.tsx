@@ -126,9 +126,9 @@ const HomePage: React.FC = () => {
           <h2 className="text-5xl font-bold">Discover Amazing Products</h2>
           <p className="mt-4 text-lg">Shop the latest trends at unbeatable prices.</p>
           <Link href="/shop">
-            <button className="mt-6 bg-white text-orange-500 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition">
+            <Button className="mt-6 bg-white text-orange-500 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition">
               Shop Now
-            </button>
+            </Button>
           </Link>
         </div>
       </section>
@@ -142,26 +142,25 @@ const HomePage: React.FC = () => {
               <Image src={product.image} alt={product.name} width={200} height={150} className="mx-auto" />
               <h4 className="text-lg font-semibold mt-4">{product.name}</h4>
               <p className="text-orange-500 font-bold text-lg">${product.price}</p>
-              <button
-                onClick={() => addToCart(product)}
-                className="mt-4 bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600"
-              >
-                Add to Cart
-              </button>
+              <div className="mt-4 flex justify-center space-x-4">
+                <Button
+                  onClick={() => addToCart(product)}
+                  className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600"
+                >
+                  Add to Cart
+                </Button>
+                <Link href={`/checkout?product=${product.id}`}>
+                  <Button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">
+                    Buy Now
+                  </Button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-12 text-center">
-        <p>&copy; 2025 ShopEase. All rights reserved.</p>
-        <div className="mt-4 space-x-4">
-          <Link href="https://facebook.com" className="hover:text-orange-400">Facebook</Link>
-          <Link href="https://twitter.com" className="hover:text-orange-400">Twitter</Link>
-          <Link href="https://instagram.com" className="hover:text-orange-400">Instagram</Link>
-        </div>
-      </footer>
+     
     </div>
   );
 };
