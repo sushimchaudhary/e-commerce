@@ -5,10 +5,9 @@ const router = express.Router();
 
 
 
-router.get('/product', getProduct)
-// router.get('/product/:id', getProductById)
-router.post('/product', createNewProduct)
-router.put('/product',updateproduct )
+router.get('/products', getProduct)
+router.post('/products', createNewProduct)
+router.put('/products',updateproduct )
 // router.delete('/product/:id', deleteProductById)
 
 module.exports = router;
